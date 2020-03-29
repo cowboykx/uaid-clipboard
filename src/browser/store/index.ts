@@ -1,5 +1,4 @@
 import { observable, autorun, action, computed, toJS, transaction, runInAction, configure } from 'mobx';
-import { setCategory, read, write } from '../storage';
 
 const dbCrud = window.dbCrud;
 
