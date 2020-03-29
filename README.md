@@ -10,9 +10,10 @@
 ### 使用介绍
 <a name="zADQV"></a>
 #### 主面板
-![Screen Shot 2020-03-29 at 17.15.45.png](https://cdn.nlark.com/yuque/0/2020/png/86538/1585473298938-7e5a6c7c-76c5-4f9b-b9b6-e87694a5d4cc.png#align=left&display=inline&height=1800&name=Screen%20Shot%202020-03-29%20at%2017.15.45.png&originHeight=1800&originWidth=2880&size=4474101&status=done&style=none&width=2880)<br />
-<br />![Screen Shot 2020-03-29 at 17.23.22.png](https://cdn.nlark.com/yuque/0/2020/png/86538/1585473762442-29493d62-a099-41b1-a588-e8d8195de116.png#align=left&display=inline&height=1074&name=Screen%20Shot%202020-03-29%20at%2017.23.22.png&originHeight=1074&originWidth=1916&size=357418&status=done&style=none&width=1916)<br />
-<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/86538/1585473915973-beec80e9-b3f5-4afe-842e-758f96093dcc.png#align=left&display=inline&height=1066&name=image.png&originHeight=1066&originWidth=1908&size=309067&status=done&style=none&width=1908)<br />
+
+![](./assets/main.png)
+![](./assets/usage.png)
+![](./assets/setting.png)
 
 <a name="xJbbf"></a>
 ### 关于隐私
@@ -36,7 +37,8 @@ uAid Clipboard 记录的内容都保存在你的本地，绝对不会上传到�
 ## 架构
 <a name="Zaq8c"></a>
 ### 运行环境依赖
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/86538/1585467997491-de46829b-d826-4e03-924d-bf0381208ad6.png#align=left&display=inline&height=167&name=image.png&originHeight=167&originWidth=890&size=44620&status=done&style=none&width=890)<br />
+
+![](./assets/runtime.png)
 
 - 整体面向用户侧使用React，状态管理使用 mobx，快捷键使用hotkeys-js
 - nodejs执行环境使用了，menubar来做菜单样式，nedb来处理本地存储，electron-clipboard-watcher 来监听系统粘贴板信息
@@ -45,7 +47,8 @@ uAid Clipboard 记录的内容都保存在你的本地，绝对不会上传到�
 
 <a name="0HqqW"></a>
 ### 编译环境
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/86538/1585467536331-f6d0dfdc-c98b-42f6-9e15-1f0c481f41eb.png#align=left&display=inline&height=183&name=image.png&originHeight=244&originWidth=644&size=61381&status=done&style=none&width=483)<br />
+
+![](./assets/pack.png)
 <br />这里 main.js 指的是在electron nodejs执行环境的js文件，考虑webpack编译nodejs文件没带来太多的价值，只是使用tsc做了一个typescript的编译功能。在webkit执行的 js browser.js 和 preload.js 使用了webpack打包<br />
 
 <a name="Dt1SY"></a>
