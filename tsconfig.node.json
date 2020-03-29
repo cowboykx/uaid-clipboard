@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.base",
+  "compilerOptions": {
+    "target": "ES5",
+    "outDir": "out/node"
+  },
+  "include": [
+    "./src/node"
+  ]
+}

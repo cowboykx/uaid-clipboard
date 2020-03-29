@@ -1,0 +1,46 @@
+html, body {
+  height: 100%;
+  user-select: none;
+}
+
+body {
+  overflow: hidden;
+}
+
+#app, .main {
+  height: 100%;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+}
+
+.ml10 {
+  margin-left: 10px;
+}
+
+.list-wrap {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .ant-list-item {
+    cursor: pointer;
+  }
+
+  .content {
+    cursor: pointer;
+  }
+
+  .handler {
+    .anticon {
+      margin-left: 10px;
+    }
+  }
+
+  .ant-table-small>.ant-table-content>.ant-table-body {
+    margin: 0;
+  }
+}

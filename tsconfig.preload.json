@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.base",
+  "compilerOptions": {
+  },
+  "include": [
+    "./src/common/global.d.ts",
+    "./src/preload.ts"
+  ]
+}

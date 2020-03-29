@@ -1,0 +1,84 @@
+{
+  "name": "uAid-Clipboard",
+  "version": "1.0.1",
+  "description": "A minimal Electron application",
+  "main": "out/node/main.js",
+  "scripts": {
+    "start": "electron .",
+    "debug": "electron . --debug --inspect=9889",
+    "dev:node": "tsc -p ./tsconfig.node.json -w",
+    "dev:web": "webpack --config ./configs/webpack.config.js --progress --watch && npm run dev:node",
+    "dev": "npm run dev:node & npm run dev:web",
+    "build:node": "tsc -p ./tsconfig.node.json",
+    "build:web": "webpack --config ./configs/webpack.config.js && npm run build:node",
+    "build": "run-p build:node build:web",
+    "pack": "npm run build && electron-builder --mac --x64"
+  },
+  "build": {
+    "appId": "com.uaidclipboard.app",
+    "mac": {
+      "icon": "icon/app.png",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    }
+  },
+  "icon": "icon/app.png",
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.40",
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
+    "@babel/preset-react": "^7.0.0-beta.40",
+    "@babel/preset-stage-0": "^7.0.0",
+    "@types/node": "^12.12.32",
+    "@types/react-dom": "^16.9.5",
+    "antd": "^3.26.13",
+    "babel-loader": "^8.0.0-beta.0",
+    "babel-plugin-lodash": "^3.3.2",
+    "babel-plugin-react-transform": "^3.0.0",
+    "css-loader": "^3.4.2",
+    "electron": "^8.0.0",
+    "electron-packager": "^14.2.1",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "hotkeys-js": "^3.7.3",
+    "less": "^3.11.1",
+    "less-loader": "^5.0.0",
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.1.8",
+    "npm-run-all": "^4.1.5",
+    "reset-css": "^5.0.1",
+    "style-loader": "^1.1.3",
+    "ts-loader": "^6.2.2",
+    "tslint": "^6.1.0",
+    "typescript": "^3.8.3",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11",
+    "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "electron-clipboard-watcher": "^1.0.1",
+    "menubar": "^8.0.0",
+    "nedb": "^1.8.0",
+    "tslib": "^1.11.1"
+  }
+}
