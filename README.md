@@ -1,25 +1,20 @@
 # uAid Clipboard —— 基于Electron的一个小工具的自我总结
 
-<a name="vwllp"></a>
 ## 简介
-<a name="acgFe"></a>
 ### 概述
-场景背景：现在但凡有一点深度讲解的文章动辄上万字，当我们沉浸式阅读时，为了保证阅读质量会避免不必要的应用切换，但是又要做文章的摘要，uAid Clipboard 提供了这个功能，而你要做的只是选中句子右键复制，Clipboard 会帮你记录好，等你完成连续性阅读后再回过头来复习下看看你做了什么。<br />技术背景：尝试下Electron应用开发<br />
+* 场景背景：现在但凡有一点深度讲解的文章动辄上万字，当我们沉浸式阅读时，为了保证阅读质量会避免不必要的应用切换，但是又要做文章的摘要，uAid Clipboard 提供了这个功能，而你要做的只是选中句子右键复制，Clipboard 会帮你记录好，等你完成连续性阅读后再回过头来复习下看看你做了什么。
+* 技术背景：尝试下Electron应用开发
 
-<a name="7FWQ3"></a>
 ### 使用介绍
-<a name="zADQV"></a>
 #### 主面板
 
 ![](./assets/main.png)
 ![](./assets/usage.png)
 ![](./assets/setting.png)
 
-<a name="xJbbf"></a>
 ### 关于隐私
-uAid Clipboard 记录的内容都保存在你的本地，绝对不会上传到服务，你可以从源码上分析出来。<br />
+uAid Clipboard 记录的内容都保存在你的本地，绝对不会上传到服务，你可以从源码上分析出来。
 
-<a name="NFgfp"></a>
 ### 安装
 有2种形式来获取安装包：
 
@@ -32,10 +27,7 @@ uAid Clipboard 记录的内容都保存在你的本地，绝对不会上传到�
   1. open dmg file
 
 
-
-<a name="Cq8Ol"></a>
 ## 架构
-<a name="Zaq8c"></a>
 ### 运行环境依赖
 
 ![](./assets/runtime.png)
@@ -43,20 +35,18 @@ uAid Clipboard 记录的内容都保存在你的本地，绝对不会上传到�
 - 整体面向用户侧使用React，状态管理使用 mobx，快捷键使用hotkeys-js
 - nodejs执行环境使用了，menubar来做菜单样式，nedb来处理本地存储，electron-clipboard-watcher 来监听系统粘贴板信息
 
-
-
-<a name="0HqqW"></a>
 ### 编译环境
 
 ![](./assets/pack.png)
-<br />这里 main.js 指的是在electron nodejs执行环境的js文件，考虑webpack编译nodejs文件没带来太多的价值，只是使用tsc做了一个typescript的编译功能。在webkit执行的 js browser.js 和 preload.js 使用了webpack打包<br />
 
-<a name="Dt1SY"></a>
+这里 main.js 指的是在electron nodejs执行环境的js文件，考虑webpack编译nodejs文件没带来太多的价值，只是使用tsc做了一个typescript的编译功能。在webkit执行的 js browser.js 和 preload.js 使用了webpack打包
+
 ## 遇到的问题
-<a name="QQ40u"></a>
 ### webpack 构建器
-webpack打包nodejs文件：起初想用webpack打包nodejs文件，需要在webpack配置文件里配置nodejs各种环境，例如 __dirname，但是总体来说带来的收益不大，后来直接使用 ts 做编译。<br />
-<br />配置 __dirname，参考文档：[https://zhuanlan.zhihu.com/p/20782320](https://zhuanlan.zhihu.com/p/20782320)
+
+webpack打包nodejs文件：起初想用webpack打包nodejs文件，需要在webpack配置文件里配置nodejs各种环境，例如 __dirname，但是总体来说带来的收益不大，后来直接使用 ts 做编译。
+
+配置 __dirname，参考文档：[https://zhuanlan.zhihu.com/p/20782320](https://zhuanlan.zhihu.com/p/20782320)
 ```shell
 ...
 context: __dirname,
@@ -68,10 +58,11 @@ node: {
 ```
 
 
-<a name="EBymH"></a>
 ### babel@8.x.x 的配置
-起初没有引入ts，使用babel来编译js，配置webpack和babel真的是一个头疼的事情，花了不少时间，一定要注意babel 和 babel-loader版本，这里记录先之前配置的信息<br />
-<br />package.json
+
+起初没有引入ts，使用babel来编译js，配置webpack和babel真的是一个头疼的事情，花了不少时间，一定要注意babel 和 babel-loader版本，这里记录先之前配置的信息
+
+package.json
 ```json
 {
   "@babel/cli": "^7.0.0-beta.40",
@@ -93,7 +84,7 @@ node: {
 }
 ```
 
-<br />webpack.config.js
+webpack.config.js
 ```javascript
 const Ex = require('extract-text-webpack-plugin');
 const path = require('path');
@@ -145,13 +136,12 @@ module.exports = {
 
 ```
 
-
-<a name="a5WuP"></a>
 ### typescript
-<a name="fotb9"></a>
+
 #### tsconfig.json
 tsconfig没什么好说，在webpack里可以指定tsconfig，针对 browser/preload/main 分别使用三个json，
-```json
+
+```javascript
 {
   test: /\.(ts|tsx)?$/,
   loader: 'ts-loader',
@@ -162,9 +152,8 @@ tsconfig没什么好说，在webpack里可以指定tsconfig，针对 browser/pre
 }
 ```
 
-
-<a name="mtfCu"></a>
 #### tsconfig编译参数
+
 这里只提常用的
 
 - target：指定需要编译js的版本
@@ -179,8 +168,8 @@ tsconfig没什么好说，在webpack里可以指定tsconfig，针对 browser/pre
 - experimentalDecorators： 开启装饰器，请设置打开吧
 
 
-<br />如下为我常用的配置<br />
-<br />tsconfig.base.json
+如下为我常用的配置
+tsconfig.base.json
 ```json
 {
   "compilerOptions": {
@@ -207,7 +196,7 @@ tsconfig没什么好说，在webpack里可以指定tsconfig，针对 browser/pre
 }
 ```
 
-<br />tsconfig.node.json<br />
+tsconfig.node.json
 
 ```json
 {
@@ -222,12 +211,11 @@ tsconfig没什么好说，在webpack里可以指定tsconfig，针对 browser/pre
 }
 ```
 
-
-<a name="YO8PU"></a>
 ### Mobx
-<a name="nvkfx"></a>
+
 #### mobx store
-请开启 enforceActions，修改数值必须通过 action<br />
+
+请开启 enforceActions，修改数值必须通过 action
 
 ```javascript
 import { configure } from 'mobx';
@@ -237,9 +225,8 @@ configure({
 });
 ```
 
-
-<a name="8oZha"></a>
 #### mobx 异步修改状态
+
 大部分时间我们使用 async/await 来做协程，async 函数里我们只能通过 runInAction 来改变状态
 
 ```javascript
@@ -261,30 +248,22 @@ class Store {
 }
 ```
 
-
-<a name="Ph5LL"></a>
 ### npm
-<a name="JmeEK"></a>
 #### 关闭 package-lock.json 文件生成
+
 vim ~/.npmrc
 ```html
 package-lock=false
 ```
 
 
-<a name="ZixUz"></a>
 #### 设置淘宝源
 vim ~/.npmrc
 ```html
 registry=https://registry.npm.taobao.org/
 ```
-
-
-<a name="PSc7J"></a>
 ### Electron
 
-
-<a name="jl6Vr"></a>
 #### 设置 electron 源文件地址
 受到网络影响，国外站点的资源无法获取，可以设置下electron的国内镜像地址<br />vim ~/.npmrc<br />
 
@@ -292,10 +271,8 @@ registry=https://registry.npm.taobao.org/
 ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 ```
 
-
-<a name="m2hzu"></a>
 #### CSP 同源策略
-在html里异步加载资源会报错，例如antd在做状态时会动态插入一些样式，这个时候你需要指定下同源策略<br />
+在html里异步加载资源会报错，例如antd在做状态时会动态插入一些样式，这个时候你需要指定下同源策略
 
 ```html
 <head>
@@ -304,11 +281,10 @@ ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/
 </head>
 ```
 
-
-<a name="6y4N9"></a>
 #### 打包
-使用 electron-builder 打包（[https://www.electron.build/](https://www.electron.build/)），包的icon放到 根目录的build目录下，[https://www.electron.build/icons](https://www.electron.build/icons)<br />
-<br />打包脚本，package.json<br />
+使用 electron-builder 打包（[https://www.electron.build/](https://www.electron.build/)），包的icon放到 根目录的build目录下，[https://www.electron.build/icons](https://www.electron.build/icons)
+
+打包脚本，package.json
 
 ```html
 scripts: {
@@ -316,19 +292,18 @@ scripts: {
 }
 ```
 
-
-<a name="6VVXl"></a>
 #### 打包镜像下载
 
-<br />electron-builder 在打包时会检测cache中是否有electron 包，如果没有的话会从github上拉去，在国内网络环境中拉取的过程大概率会失败，所以你可以自己去下载一个包放到cache目录里，参考：[https://github.com/electron/get#how-it-works](https://github.com/electron/get#how-it-works)<br />
-<br />各个平台的目录地址
+electron-builder 在打包时会检测cache中是否有electron 包，如果没有的话会从github上拉去，在国内网络环境中拉取的过程大概率会失败，所以你可以自己去下载一个包放到cache目录里，参考：[https://github.com/electron/get#how-it-works](https://github.com/electron/get#how-it-works)
+
+各个平台的目录地址
 
 - Linux: $XDG_CACHE_HOME or ~/.cache/electron/
 - MacOS: ~/Library/Caches/electron/
 - Windows: %LOCALAPPDATA%/electron/Cache or ~/AppData/Local/electron/Cache/
 
 
-<br />例如在macos平台打包electron应用，执行 electron-builder --mac --x64<br />
+例如在macos平台打包electron应用，执行 electron-builder --mac --x64
 
 ```
 ➜  clipboard git:(master) ✗ npm run dist
@@ -341,5 +316,6 @@ scripts: {
   • downloading     url=https://github.com/electron/electron/releases/download/v8.0.0/electron-v8.0.0-darwin-x64.zip size=66 MB parts=8
 ```
 
-<br />可以单独下载这个包 [https://github.com/electron/electron/releases/download/v8.0.0/electron-v8.0.0-darwin-x64.zip，](https://github.com/electron/electron/releases/download/v8.0.0/electron-v8.0.0-darwin-x64.zip%EF%BC%8C) 放到~/Library/Caches/electron/ 目录下<br />
-<br />谢谢
+可以单独下载这个包 [https://github.com/electron/electron/releases/download/v8.0.0/electron-v8.0.0-darwin-x64.zip，](https://github.com/electron/electron/releases/download/v8.0.0/electron-v8.0.0-darwin-x64.zip%EF%BC%8C) 放到~/Library/Caches/electron/ 目录下
+
+谢谢
